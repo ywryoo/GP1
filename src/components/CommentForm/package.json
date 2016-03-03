@@ -1,0 +1,6 @@
+{
+  "name": "CommentForm",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./CommentForm.jsx"
+}

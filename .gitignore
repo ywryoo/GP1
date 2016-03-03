@@ -31,3 +31,15 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# mac fs files
+.DS_Store
+
+# DB data
+src/constants/db.js
+
+# Backup mark
+*.bak
+
+# built files
+dist

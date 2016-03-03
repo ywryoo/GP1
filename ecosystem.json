@@ -1,0 +1,23 @@
+{
+  "apps" : [
+    {
+      "name": "ABC",
+      "script": "dist/server.js",
+      "env": {
+        "COMMON_VARIABLE": "true",
+        "NODE_PATH": "/var/www/development/source/dist"
+      }
+    }
+  ],
+  "deploy" : {
+    "dev" : {
+      "user" : "ABC",
+      "host" : "-",
+      "key"  : "-",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:ywryoo/GP1.git",
+      "path" : "/var/www/development",
+      "post-deploy" : "source ~/.nvm/nvm.sh && nvm use 4.3.1 && npm install && gulp start && pm2 startOrRestart ecosystem.json --env dev"
+    }
+  }
+}

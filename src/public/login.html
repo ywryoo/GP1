@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html class="no-js" lang="kr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css">
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', '', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</head>
+<body>
+<div class="row">
+  <div class="medium-6 medium-centered large-4 large-centered columns">
+
+    <form action="/login" method="post">
+      <div class="row column log-in-form">
+        <h4 class="text-center">Log in with you email account</h4>
+        <label>Email
+          <input type="text" name="username" placeholder="somebody@example.com" />
+        </label>
+        <label>Password
+          <input type="text" name="password" placeholder="Password" />
+        </label>
+        <p><input type="submit" class="button expanded" value="Log In" /></p>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="./jquery.min.js"></script>
+<!--<script>
+$(document).ready(function() {
+  $("a.button").on("click", function(e) {
+    e.preventDefault();
+    console.log('aa');
+  });
+});
+</script> -->
+</body>
+</html>

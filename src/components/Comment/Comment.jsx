@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import marked from 'marked';
 
 export default class Comment extends React.Component {
   render() {
-    let rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+    let rawMarkup = this.props.children.toString()  ;
     return (
       <div className="comment">
         <h2 className="commentAuthor">

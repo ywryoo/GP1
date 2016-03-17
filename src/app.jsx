@@ -24,13 +24,14 @@ class CommentBoxWrapper extends React.Component {
 
 function renderReact() {
   render((
-    <Router history={hashHistory}>
-      <Route path="/" component={MainApp}>
-        <IndexRoute component={CommentBoxWrapper} />
-        <Route path="todo" component={TodoApp} />
-        <Route path="register" component={Register} />
-      </Route>
-    </Router>
+  <Router history={hashHistory}>
+    <Route path="/" component={MainApp}>
+      <IndexRoute component={CommentBoxWrapper} />
+      <Route path="challenge" component={TodoApp} />
+      <Route path="learn" component={TodoApp} />
+      <Route path="register" component={Register} />
+    </Route>
+  </Router>
   ), document.getElementById('app'));
 }
 

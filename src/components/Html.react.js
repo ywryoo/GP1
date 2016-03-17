@@ -10,13 +10,11 @@ import { googleAnalyticsId } from '../constants/ABCConfig';
 
 export default class Html extends React.Component {
   static propTypes = {
-    title: React.PropTypes.string,
-    description: React.PropTypes.string
+    username: React.PropTypes.string
   };
 
   static defaultProps = {
-    title: '',
-    description: ''
+    username: ''
   };
 
   trackingCode() {
@@ -31,13 +29,13 @@ export default class Html extends React.Component {
   }
 
   render() {
-    return (
+    return this.props.username ? (
       <html className="no-js" lang="kr">
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <title>{this.props.title}</title>
-        <meta name="description" content={this.props.description} />
+        <title>Welcome to GP1</title>
+        <meta name="description" content="GP1" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
@@ -46,6 +44,6 @@ export default class Html extends React.Component {
         <script dangerouslySetInnerHTML={this.trackingCode()} />
       </body>
       </html>
-    );
+    ) : <p>go to <a href="login">login</a></p>;
   }
 }

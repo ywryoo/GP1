@@ -17,15 +17,15 @@ export default class Header extends React.Component {
       <div className="top-bar">
         <div className="top-bar-left">
           <ul className="menu">
-            <li className="menu-text">IWYTS</li>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/Todo">Todo</Link></li>
+            <li className="menu-text">ABC</li>
+            <li><Link to="/">대시보드</Link></li>
+            <li><Link to="/challenge">문제</Link></li>
+            <li><Link to="/learn">배우기</Link></li>
           </ul>
         </div>
         <div className="top-bar-right">
           <ul className="menu">
-            <li><input type="search" placeholder="Search" /></li>
-            <li><button type="button" className="button">Search</button></li>
+            <li><Link to="/">프로필</Link></li>
           </ul>
         </div>
       </div>

@@ -20,24 +20,24 @@ import Html from './components/Html.react';
 import userdata from './tempuser';
 
 passport.use(new passportLocal.Strategy(
-  function(username, password, cb) {
-    userdata.findByUsername(username, function(err, user) {
-      if (err) { return cb(err); }
-      if (!user) { return cb(null, false); }
-      if (user.password != password) { return cb(null, false); }
-      return cb(null, user);
+  (username, password, done) => {
+    userdata.findByUsername(username, (err, user) => {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      if (user.password != password) { return done(null, false); }
+      return done(null, user);
     });
   })
 );
 
-passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
 });
 
-passport.deserializeUser(function(id, cb) {
+passport.deserializeUser(function(id, done) {
   userdata.findById(id, function (err, user) {
-    if (err) { return cb(err); }
-    cb(null, user);
+    if (err) { return done(err); }
+    done(null, user);
   });
 });
 
@@ -64,7 +64,9 @@ server.set("data", [
     {id:2, author: "Jordan Walke", text: "*또 다른* 댓글입니다."}
   ]);
 
-
+//use jade for intro/login page
+server.set('view engine', 'jade');
+server.set('views', 'src/templates')
 //defend basic attacks
 server.use(helmet());
 //session
@@ -81,29 +83,40 @@ server.use('/api', api);
 server.use(passport.initialize());
 server.use(passport.session());
 
-server.get('/login', async (req, res, next) => {
+//error handler
+server.use(async (err, req, res, next) => {
+  console.error(err);
+  res.render('500');
+});
+
+//login page
+server.get('/', async (req, res, next) => {
   try {
-    res.sendFile(process.env.NODE_PATH + "/public/login.html");
+    if(req.user){
+      const html = ReactDOMServer.renderToString(<Html username={ req.user.username } />);
+      res.send('<!DOCTYPE HTML>\n' + html);
+    } else {
+      res.render('index');
+    }
   } catch (err) {
     next(err);
   }
 });
 
-server.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
+server.route('/login')
+  .get(async (req, res, next) => {
+    res.render('login');
+  })
+  .post(
+  passport.authenticate('local', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect('/'+req.user.username);
+    res.redirect('/?='+req.user.username);
   }
 );
 
-
-server.get('*', async (req, res, next) => {
-  try {
-    const html = ReactDOMServer.renderToString(<Html username={req.user ? req.user.username : ''} />);
-    res.send('<!DOCTYPE HTML>\n' + html);
-  } catch (err) {
-    next(err);
-  }
+//404 handler
+server.use(async (req, res, next) => {
+  res.render('404');
 });
 
 server.listen(port, () => {

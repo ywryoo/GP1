@@ -1,0 +1,22 @@
+//-
+  Created by Yangwook Ryoo on 3/19/16.
+
+  This source code is licensed under the MIT license found in the
+  LICENSE file in the root directory of this source tree.
+extends base
+block title
+  title GP1 | Login
+block content
+  .row
+    .medium-6.medium-centered.large-4.large-centered.columns
+      form(action='/login', method='post')
+        .row.column.log-in-form
+          h4.text-center Log in with you email account
+          label
+            | Email
+            input(type='text', name='username', placeholder='somebody@example.com')
+          label
+            | Password
+            input(type='text', name='password', placeholder='Password')
+          p
+            input.button.expanded(type='submit', value='Log In')
